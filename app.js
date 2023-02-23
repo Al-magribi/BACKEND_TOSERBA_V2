@@ -9,7 +9,14 @@ const cors = require("cors");
 
 const errorMiddleware = require("./utilities/errorMiddleware");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://toserba-v2.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(express.json({ limit: "70mb" }));
 app.use(bodyParser.json({ limit: "70mb" }));
 app.use(
