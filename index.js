@@ -2,6 +2,7 @@ require("dotenv").config();
 const app = require("./app");
 const dbConnection = require("./config/database");
 const path = require("path");
+const express = require("express");
 
 process.on("uncaughtException", (err) => {
   console.log(`ERROR: ${err.stack}`);
@@ -11,9 +12,13 @@ process.on("uncaughtException", (err) => {
 
 dbConnection();
 
-// app.get("/", (req, res) => {
-//   res.send("Server ok");
-// });
+if (process.env.NODE_ENV === "PRODUCTION") {
+  app.use(express.static(path.join(__dirname, "./build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "./build/index.html"));
+  });
+}
 
 const PORT = 1000;
 
