@@ -6,6 +6,7 @@ const session = require("express-session");
 const passport = require("passport");
 const User = require("./models/User");
 const cors = require("cors");
+const path = require("path");
 
 const errorMiddleware = require("./utilities/errorMiddleware");
 
@@ -110,6 +111,14 @@ app.use("/api/order", orderRoutes);
 app.use("/api/shipment", shipmentRoutes);
 
 app.use("/api/payment", paymentRoutes);
+
+if (process.env.NODE_ENV === "PRODUCTION") {
+  app.use(express.static(path.join(__dirname, "./build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "./build/index.html"));
+  });
+}
 
 app.use(errorMiddleware);
 
