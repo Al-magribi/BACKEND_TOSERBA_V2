@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 
-app.listen(process.env.PORT  () => {
+app.listen(process.env.PORT , () => {
   console.log(
     `Server aktif di port ${process.env.PORT}${PORT} dimode ${process.env.NODE_ENV}`
   );
