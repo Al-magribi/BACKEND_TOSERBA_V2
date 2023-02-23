@@ -14,6 +14,8 @@ app.use(
     origin: "https://toserba-v2.netlify.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
