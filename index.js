@@ -11,9 +11,9 @@ process.on("uncaughtException", (err) => {
 
 dbConnection();
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./build/index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.send("Server ok");
+// });
 
 const PORT = 1000;
 
