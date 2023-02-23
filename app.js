@@ -1,3 +1,4 @@
+const functions = require("firebase-functions");
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -92,5 +93,7 @@ app.use("/api/shipment", shipmentRoutes);
 app.use("/api/payment", paymentRoutes);
 
 app.use(errorMiddleware);
+
+exports.api = functions.https.onRequest(app);
 
 module.exports = app;
