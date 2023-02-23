@@ -17,6 +17,17 @@ app.use(
   })
 );
 
+// Allow CORS for all routes
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://toserba-v2.netlify.app");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
+});
+
 app.use(express.json({ limit: "70mb" }));
 app.use(bodyParser.json({ limit: "70mb" }));
 app.use(
