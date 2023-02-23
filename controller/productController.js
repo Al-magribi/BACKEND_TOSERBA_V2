@@ -1,6 +1,5 @@
 const catchError = require("../utilities/catchError");
 const Product = require("../models/Product");
-const xlsx = require("xlsx");
 
 // All Products
 exports.getAllProduct = catchError(async (req, res) => {
@@ -78,40 +77,6 @@ exports.createProduct = catchError(async (req, res) => {
   res.status(201).json({
     success: true,
     product,
-  });
-});
-
-// Upload products from excel to database
-exports.uploadFileExcel = catchError(async (req, res) => {
-  console.log(req.file);
-  // read excel file
-  const excelFile = xlsx.readFile(req.file.buffer, { type: "buffer" });
-
-  // extract data from excel
-  const sheet = excelFile.Sheets[excelFile.SheetNames["Sheet1"]];
-
-  // covert to JSON format
-  const data = sheet.utils.sheet_to_json(sheet);
-
-  data.forEach((data) => {
-    const productData = new Product({
-      name: data.name,
-      img: data.img,
-      price: data.price,
-      capital: data.capital,
-      profit: data.profit,
-      desc: data.desc,
-      category: data.category,
-      stock: data.stock,
-      weight: data.weight,
-    });
-    productData
-      .save()
-      .then(() =>
-        res
-          .status(200)
-          .json({ success: true, message: "data saved successfully" })
-      );
   });
 });
 

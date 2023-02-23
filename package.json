@@ -32,8 +32,6 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^7.1.2",
-    "uuid": "^9.0.0",
-    "validator": "^13.7.0",
-    "xlsx": "^0.18.5"
+    "validator": "^13.7.0"
   }
 }
