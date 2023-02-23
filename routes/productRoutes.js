@@ -1,10 +1,8 @@
 const express = require("express");
-const multer = require("multer");
 const {
   getAllProduct,
   detailProduct,
   createProduct,
-  uploadFileExcel,
   updateProduct,
   getAllProductAdmin,
   deleteProduct,
@@ -16,23 +14,6 @@ const {
   authorizeRoles,
 } = require("../utilities/auth&authorizes");
 const router = express.Router();
-const fs = require("fs");
-
-// Create upload folder if it doesn't exist
-if (!fs.existsSync("../upload")) {
-  fs.mkdirSync("../upload");
-}
-
-//set up multer file upload
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../upload/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
 
 router.route("/products").get(getAllProduct);
 
@@ -48,15 +29,6 @@ router
 router
   .route("/admin/product/create")
   .post(authenticatedUser, authorizeRoles("admin"), createProduct);
-
-router
-  .route("/admin/product/uploadExcel")
-  .post(
-    authenticatedUser,
-    authorizeRoles("admin"),
-    upload.single("file"),
-    uploadFileExcel
-  );
 
 router
   .route("/admin/product/update/:id")
