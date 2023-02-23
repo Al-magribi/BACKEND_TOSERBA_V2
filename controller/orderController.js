@@ -1,5 +1,5 @@
 const catchError = require("../utilities/catchError");
-const ErrorHandler = require("../utilities/ErrorHandler");
+const ErrorHandler = require("../utilities/errorHandler");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
 
